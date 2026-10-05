@@ -11,7 +11,7 @@ export default function WhyNotGiantsTab() {
             <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
             <line x1="12" y1="17" x2="12.01" y2="17"></line>
           </svg>
-          Why Big UPI Tech Giants Haven't Built Offline Mesh Payments Yet
+          Industry Analysis: Structural &amp; Regulatory Constraints for Major PSPs
         </div>
         <p className="doc-text">
           Google Pay, PhonePe, and Paytm handle over <strong>95% of India's UPI volume</strong> and have world-class engineering teams. 
@@ -29,7 +29,7 @@ export default function WhyNotGiantsTab() {
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
           </svg>
-          The 4 Structural Blockers for Big Tech
+          The 4 Structural Barriers to Enterprise Implementation
         </div>
 
         <div className="doc-grid">

@@ -11,7 +11,7 @@ export default function ProblemSolutionTab() {
             <line x1="12" y1="8" x2="12" y2="12"></line>
             <line x1="12" y1="16" x2="12.01" y2="16"></line>
           </svg>
-          The Problem: The "Basement Dilemma" in Digital Payments
+          System Motivation: Synchronous Bottlenecks in Offline Environments
         </div>
         <p className="doc-text">
           India processes over <strong>14 billion UPI transactions every month</strong>. However, standard UPI architectures share a single critical vulnerability: 
@@ -52,7 +52,7 @@ export default function ProblemSolutionTab() {
             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
             <polyline points="22 4 12 14.01 9 11.01"></polyline>
           </svg>
-          How ZeroNet UPI Solved It (Technical Architecture)
+          Protocol Architecture &amp; Cryptographic Mitigation Strategy
         </div>
         <p className="doc-text">
           ZeroNet UPI decouples <strong>payment authorization (done locally &amp; offline)</strong> from <strong>payment settlement (executed asynchronously when any device reaches connectivity)</strong> through a 4-pillar cryptographic protocol.
