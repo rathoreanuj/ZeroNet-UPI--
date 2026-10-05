@@ -14,15 +14,9 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import { existsSync } from 'fs';
-
 import apiRouter from './routes/api.js';
 import { seedAccounts } from './services/demoService.js';
 import { getKeyPair } from './crypto/serverKeyHolder.js';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const PORT = process.env.PORT ?? 8080;
 const MONGODB_URI = process.env.MONGODB_URI ?? 'mongodb://localhost:27017/upi_mesh';
@@ -39,26 +33,26 @@ app.use(express.json({ limit: '2mb' }));
 
 app.use('/api', apiRouter);
 
-// ── Serve built React frontend (if it exists) ─────────────────────────────────
-// The Vite build output lands in ../frontend/dist — serve it from here so
-// the Node.js backend can replace Spring Boot as a drop-in, single-process server.
+// ── Status & Health check ─────────────────────────────────────────────────────
 
-const frontendDist = join(__dirname, '../../frontend/dist');
-if (existsSync(frontendDist)) {
-  app.use(express.static(frontendDist));
-  // SPA fallback — let React Router handle all non-API routes
-  app.get(/^(?!\/api).*/, (_req, res) => {
-    res.sendFile(join(frontendDist, 'index.html'));
+app.get('/', (_req, res) => {
+  res.json({
+    status: 'online',
+    message: 'ZeroNet UPI Backend API is running',
+    version: '1.0.0',
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    timestamp: new Date().toISOString(),
+    docs: '/api/server-key',
   });
-} else {
-  app.get('/', (_req, res) => {
-    res.json({
-      message: 'ZeroNet UPI Backend (Node.js + MongoDB)',
-      hint: 'Run `npm run build` inside the frontend/ folder, then restart, to serve the dashboard here.',
-      api: 'All API endpoints available under /api',
-    });
+});
+
+app.get('/health', (_req, res) => {
+  res.json({
+    status: 'healthy',
+    uptimeSeconds: Math.floor(process.uptime()),
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
   });
-}
+});
 
 // ── Boot sequence ─────────────────────────────────────────────────────────────
 

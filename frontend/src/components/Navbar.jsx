@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Navbar({ theme, onToggleTheme, onShowKeyModal, onShowH2Modal, onSync, isSyncing }) {
+export default function Navbar({ theme, onToggleTheme, onShowKeyModal, onSync, isSyncing }) {
   return (
     <header className="saas-header">
       <div className="header-inner">
@@ -66,14 +66,6 @@ export default function Navbar({ theme, onToggleTheme, onShowKeyModal, onShowH2M
             RSA Key
           </button>
 
-          <button className="btn-ghost-sm" onClick={onShowH2Modal} title="View H2 DB Connection Details">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-            </svg>
-            H2 Console
-          </button>
 
           <button className="btn-ghost-sm" onClick={() => onSync(true)}>
             <svg 

@@ -18,7 +18,7 @@ export default function AccountsTable({ accounts, onPrefillTransfer, idempotency
           </svg>
           Participant Balances
         </div>
-        <div className="card-badge">H2 In-Memory DB</div>
+        <div className="card-badge">MongoDB</div>
       </div>
 
       <div className="saas-table-wrap">

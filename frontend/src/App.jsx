@@ -8,7 +8,6 @@ import AccountsTable from './components/AccountsTable';
 import TransactionLedger from './components/TransactionLedger';
 import ActivityTerminal from './components/ActivityTerminal';
 import KeyModal from './components/KeyModal';
-import H2Modal from './components/H2Modal';
 import ToastContainer from './components/ToastContainer';
 import ProblemSolutionTab from './components/ProblemSolutionTab';
 import WhyNotGiantsTab from './components/WhyNotGiantsTab';
@@ -44,7 +43,6 @@ export default function App() {
   // Enclave Modal State
   const [keyModalOpen, setKeyModalOpen] = useState(false);
   const [serverPublicKey, setServerPublicKey] = useState('');
-  const [h2ModalOpen, setH2ModalOpen] = useState(false);
 
   // Toast Helper
   const addToast = useCallback((title, message, type = 'info') => {
@@ -310,7 +308,6 @@ export default function App() {
         theme={theme}
         onToggleTheme={toggleTheme}
         onShowKeyModal={handleShowKeyModal}
-        onShowH2Modal={() => setH2ModalOpen(true)}
         onSync={refresh}
         isSyncing={isSyncing}
       />
@@ -415,10 +412,7 @@ export default function App() {
         onCopyKey={handleCopyKey}
       />
 
-      <H2Modal
-        isOpen={h2ModalOpen}
-        onClose={() => setH2ModalOpen(false)}
-      />
+
 
       <ToastContainer toasts={toasts} />
     </>

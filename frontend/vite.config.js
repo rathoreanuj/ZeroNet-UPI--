@@ -8,17 +8,14 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://127.0.0.1:8080',
         changeOrigin: true,
+        secure: false,
       },
-      '/h2-console': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-      }
     }
   },
   build: {
-    outDir: '../src/main/resources/static',
+    outDir: 'dist',
     emptyOutDir: true,
   }
 })
