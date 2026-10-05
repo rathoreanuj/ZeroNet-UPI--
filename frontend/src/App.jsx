@@ -12,6 +12,8 @@ import ToastContainer from './components/ToastContainer';
 import ProblemSolutionTab from './components/ProblemSolutionTab';
 import WhyNotGiantsTab from './components/WhyNotGiantsTab';
 
+const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('simulator');
 
@@ -83,7 +85,7 @@ export default function App() {
     if (isManual) setIsSyncing(true);
     try {
       // 1. Mesh state
-      const meshRes = await fetch('/api/mesh/state');
+      const meshRes = await fetch(`${API_BASE}/api/mesh/state`);
       if (meshRes.ok) {
         const meshData = await meshRes.json();
         setDevices(meshData.devices || []);
@@ -91,14 +93,14 @@ export default function App() {
       }
 
       // 2. Accounts
-      const accRes = await fetch('/api/accounts');
+      const accRes = await fetch(`${API_BASE}/api/accounts`);
       if (accRes.ok) {
         const accData = await accRes.json();
         setAccounts(accData || []);
       }
 
       // 3. Transactions
-      const txRes = await fetch('/api/transactions');
+      const txRes = await fetch(`${API_BASE}/api/transactions`);
       if (txRes.ok) {
         const txData = await txRes.json();
         setTransactions(txData || []);
@@ -128,7 +130,7 @@ export default function App() {
   const handleShowKeyModal = async () => {
     setKeyModalOpen(true);
     try {
-      const res = await fetch('/api/server-key');
+      const res = await fetch(`${API_BASE}/api/server-key`);
       if (res.ok) {
         const data = await res.json();
         setServerPublicKey(data.publicKey);
@@ -149,7 +151,7 @@ export default function App() {
   const handleSendPacket = async (body) => {
     setIsInjecting(true);
     try {
-      const res = await fetch('/api/demo/send', {
+      const res = await fetch(`${API_BASE}/api/demo/send`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -176,7 +178,7 @@ export default function App() {
   const handleGossip = async () => {
     setIsGossiping(true);
     try {
-      const res = await fetch('/api/mesh/gossip', { method: 'POST' });
+      const res = await fetch(`${API_BASE}/api/mesh/gossip`, { method: 'POST' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const r = await res.json();
 
@@ -197,7 +199,7 @@ export default function App() {
   const handleFlushBridges = async () => {
     setIsFlushing(true);
     try {
-      const res = await fetch('/api/mesh/flush', { method: 'POST' });
+      const res = await fetch(`${API_BASE}/api/mesh/flush`, { method: 'POST' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const r = await res.json();
 
@@ -236,7 +238,7 @@ export default function App() {
   const handleResetMesh = async () => {
     if (!window.confirm('Are you sure you want to clear all mesh packets and the idempotency cache?')) return;
     try {
-      await fetch('/api/mesh/reset', { method: 'POST' });
+      await fetch(`${API_BASE}/api/mesh/reset`, { method: 'POST' });
       addLog('🗑 [RESET] Mesh packets dropped and atomic idempotency cache cleared.', 'warn');
       addToast('System Reset', 'Mesh and idempotency cache cleared', 'info');
       await refresh();

@@ -1,0 +1,9 @@
+{
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/api/:match*",
+      "destination": "https://zeronet-upi-backend.onrender.com/api/:match*"
+    }
+  ]
+}
